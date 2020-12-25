@@ -1,12 +1,15 @@
 
 
 import UIKit
+import RxSwift
+import LYEmptyView
 
 class InvokeHistoryViewController: ViewController {
     lazy var tableView: UITableView = {
         let table = UITableView.init(frame: CGRect.zero, style: UITableView.Style.plain)
         table.register(InvokeHistoryTableViewCell.self, forCellReuseIdentifier: "InvokeHistoryTableViewCell")
         table.rowHeight = 44
+        table.tableFooterView = UIView()
         return table
     }()
 
@@ -23,7 +26,10 @@ class InvokeHistoryViewController: ViewController {
         super.makeUI()
         
         
-        
+        let emptyView: LYEmptyView  = LYEmptyView.empty(withImageStr: "暂无内容", titleStr: "没有相关内容哦", detailStr: "")
+        emptyView.titleLabTextColor = UIColor.gray
+        emptyView.titleLabFont = UIFont.systemFont(ofSize: 13)
+        tableView.ly_emptyView = emptyView
         
         self.view.addSubview(self.tableView)
         self.tableView.snp.makeConstraints { (make) in
